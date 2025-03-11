@@ -22,13 +22,13 @@ def test_q1_login():
     import subprocess
 
     try:
-        process = subprocess.Popen('python app.py opps!', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python','app.py','opps!'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate(timeout=1)  # Timeout after 5 seconds
     except subprocess.TimeoutExpired:
         process.kill()
         stdout, stderr = process.communicate()  # Ensure process cleanup
         
-    assert b'POS' in stdout, "Not able to login with opps! as password"        
+    assert b'POS' in stdout, "Not able to login with opps! as password" 
     
 def test_q2_use_emily33():
     assert 'emily33' in open('2.sql').read().lower(), "You need to use emily33 in 2.sql"
